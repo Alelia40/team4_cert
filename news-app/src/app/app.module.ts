@@ -12,6 +12,7 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
+import { MapComponent } from './components/map/map.component';
 
 const routes: Routes = [
   {path:'home', component:HomeComponent},
@@ -31,7 +32,8 @@ const routes: Routes = [
     AboutUsComponent,
     ContactUsComponent,
     PageNotFoundComponent,
-    FooterComponent
+    FooterComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
