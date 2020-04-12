@@ -1,1 +1,22 @@
-<p>contact-us works!</p>
+<h2>Send us a query</h2>
+<hr />
+<form (submit)="handleEmail()">
+    <div class="row">
+        <div class="col">
+            <label for="email">Your Email</label>
+            <input type="text" class="form-control" name="email" [(ngModel)]='email'>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label for="query">Your Query</label>
+            <input type="text" class="form-control" name="query" [(ngModel)]='query'>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col">
+            <input type="submit" class="btn btn-info">
+        </div>
+    </div>
+</form>
