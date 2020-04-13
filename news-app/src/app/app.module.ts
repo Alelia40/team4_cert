@@ -21,13 +21,16 @@ import { WeatherComponent } from './components/home/weather/weather.component';
 import { ImageSliderComponent } from './components/home/image-slider/image-slider.component';
 import { NewsComponent } from './components/home/news/news.component';
 import { ChatComponent } from './components/home/chat/chat.component';
+import { SportNewsComponent } from './components/sports/sport-news/sport-news.component';
 
 const routes: Routes = [
+
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   {path:'home', component:HomeComponent},
   {path:'sports', component:SportsComponent},
   {path:'about', component:AboutUsComponent},
   {path:'contact', component:ContactUsComponent},
-  {path: '', redirectTo:'/home', pathMatch:'full'},
+  { path: 'viewSportNews/:id', component: SportNewsComponent},
   {path:'**', component:PageNotFoundComponent}
 ]
 
@@ -45,7 +48,8 @@ const routes: Routes = [
     WeatherComponent,
     ImageSliderComponent,
     NewsComponent,
-    ChatComponent
+    ChatComponent,
+    SportNewsComponent
   ],
   imports: [
     BrowserModule,
