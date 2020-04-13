@@ -2,18 +2,18 @@ newsList = [
   {
     "title" : "Election 2020",
     "description": "Berinie dropped out, Joe Baiden is the candidate from Democratic party",
-    "published At": " 04/01/2020"
+    "publishedAt": " 04/01/2020"
   },
   {
     "title": "Covid 19",
     "description": "Covid-19 is a SARS virus that weaken human's repiratory system. And kill human",
-    "published At": " 04/01/2020"
+    "publishedAt": " 04/01/2020"
   }
   ,
   {
     "title": "Bill-201020.1",
     "description": "The United States now have a full equipped space army. They declare a war with MARS",
-    "published At": " 04/01/2020"
+    "publishedAt": " 04/01/2020"
   }
 
 ]
