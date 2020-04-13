@@ -13,13 +13,16 @@ import { ContactUsComponent } from './components/contact-us/contact-us.component
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
 import { MapComponent } from './components/map/map.component';
+import { SportNewsComponent } from './components/sports/sport-news/sport-news.component';
 
 const routes: Routes = [
+
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   {path:'home', component:HomeComponent},
   {path:'sports', component:SportsComponent},
   {path:'about', component:AboutUsComponent},
   {path:'contact', component:ContactUsComponent},
-  {path: '', redirectTo:'/home', pathMatch:'full'},
+  { path: 'viewSportNews/:id', component: SportNewsComponent,},
   {path:'**', component:PageNotFoundComponent}
 ]
 
@@ -33,7 +36,8 @@ const routes: Routes = [
     ContactUsComponent,
     PageNotFoundComponent,
     FooterComponent,
-    MapComponent
+    MapComponent,
+    SportNewsComponent
   ],
   imports: [
     BrowserModule,

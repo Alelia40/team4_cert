@@ -6,10 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sports.component.css']
 })
 export class SportsComponent implements OnInit {
+  
+  sportnewsList = [  ]
 
   constructor() { }
 
   ngOnInit(): void {
+    this.sportnewsList = [] 
   }
 
 }
