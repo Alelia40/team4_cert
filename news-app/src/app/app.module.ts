@@ -6,7 +6,6 @@ import { RouterModule, Routes, Router } from '@angular/router';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import {IvyCarouselModule} from 'angular-responsive-carousel';
 import {SlideshowModule} from 'ng-simple-slideshow';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/shared/header/header.component';
