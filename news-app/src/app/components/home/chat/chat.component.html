@@ -1,1 +1,33 @@
-<p>chat works!</p>
+<div class="row">
+    <div class="col">
+        <div class="card float-right">
+            <h5 class="card-header">Chat</h5>
+            <div class="card-body">
+                <div class="scrollable">
+                    <div class="card-text">
+                        <ul id="chat-list" #chatList></ul>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-muted">
+                <form id="msgForm" (keydown.enter)="$event.preventDefault()" (submit)="handleChatSend()">
+                    <div id="usernameSelect" class="input-group">
+                        <input type="text" class="form-control" placeholder="Enter Username"
+                            aria-label="Sender's username" [(ngModel)]="username" name="username">
+                        <div i class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" (click)="handleUNSelect()">Pick
+                                Username</button>
+                        </div>
+                    </div>
+                    <div id="sendChat" class="input-group" style="display:none">
+                        <input type="text" class="form-control" placeholder="Send Chat" aria-label="Sender's Message"
+                            [(ngModel)]="messageContent" name="messageContent">
+                        <div class="input-group-append">
+                            <input class="btn btn-outline-info" type="submit" value="Send">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

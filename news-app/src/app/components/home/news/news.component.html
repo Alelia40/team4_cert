@@ -1,1 +1,19 @@
-<p>news works!</p>
+<h4>Latest Stories</h4>
+<hr />
+<div class="card">
+    <div class="card-header btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-secondary active">
+          <input type="radio" name="options" id="story1" autocomplete="off" (click)="handleSelect(1)" checked> Story 1
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="options" id="story2" autocomplete="off" (click)="handleSelect(2)"> Story 2
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="options" id="story3" autocomplete="off" (click)="handleSelect(3)"> Story 3
+        </label>
+    </div>
+    <div class="card-body">
+        <h5 class="text-center">{{currentTitle}}</h5>
+        <p>{{currentContent}}</p>
+    </div>
+</div>
