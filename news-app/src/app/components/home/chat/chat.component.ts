@@ -14,10 +14,15 @@ export class ChatComponent implements OnInit {
   messageContent:string = '';
   username:string = '';
 
-  constructor(private renderer:Renderer2) {
+  constructor(private renderer:Renderer2, private msg:MessengerService) {
   }
 
   ngOnInit(): void {
+    this.msg
+        .getMessage()
+        .subscribe(msg => {
+          console.log('Incoming msg', msg);
+        });
   }
 
   handleUNSelect(){
@@ -28,6 +33,7 @@ export class ChatComponent implements OnInit {
 
   handleChatSend(){
     console.log("sending message");
+    this.msg.sendMsg("chat", this.username, this.messageContent);
     this.receiveMessage(this.username,this.messageContent);
   }
 

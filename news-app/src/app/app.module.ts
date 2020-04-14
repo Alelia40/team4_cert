@@ -6,6 +6,8 @@ import { RouterModule, Routes, Router } from '@angular/router';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import {IvyCarouselModule} from 'angular-responsive-carousel';
 import {SlideshowModule} from 'ng-simple-slideshow';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+ 
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/shared/header/header.component';
@@ -33,6 +35,8 @@ const routes: Routes = [
   {path:'**', component:PageNotFoundComponent}
 ]
 
+const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,7 +61,8 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     SlickCarouselModule,
     IvyCarouselModule,
-    SlideshowModule
+    SlideshowModule,
+    SocketIoModule.forRoot(config)
   ],
   providers: [],
   bootstrap: [AppComponent]

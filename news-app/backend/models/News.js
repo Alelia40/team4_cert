@@ -8,7 +8,7 @@ let NewsSchema = new Schema(
     description: { type: String, required: true },
     URL: { type: String },
     imageURL: { type: String },
-    publishedAt: { type: Date, default: new Data().getDate()}
+    publishedAt: { type: Date, default: Date.now}
   }, 
   { 
     versionKey: false

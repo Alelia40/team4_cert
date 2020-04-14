@@ -24,6 +24,10 @@ let mongoose = require('mongoose');
 let morgan = require('morgan');
 let bodyParser = require('body-parser');
 let port = 3000;
+
+const http = require('http');
+const socketio = require('socket.io');
+
 let admin = require('./backend/routes/admin');
 let news = require('./backend/routes/news');
 let config = require('config'); //we load the db location from the JSON files
@@ -43,6 +47,20 @@ if(config.util.getEnv('NODE_ENV') !== 'test') {
     //use morgan to log at command line
     app.use(morgan('combined')); //'combined' outputs the Apache style LOGs
 }
+
+//socket IO stuff for chatbox
+const server = http.createServer(app);
+
+const io = socketio(server, {
+  origins : "http://localhost:*"
+});
+io.on('connection', (socket) => {
+    socket.on('msg', (msg) => {
+        io.emit('Chat Message', msg)
+    })
+});
+//const cors = require('cors');
+//app.use(cors());
 
 //parse application/json and look for raw text                                        
 app.use(bodyParser.json());                                     
