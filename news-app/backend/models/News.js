@@ -6,7 +6,9 @@ let NewsSchema = new Schema(
   {
     title: { type: String, required: true },
     description: { type: String, required: true },
-    publishedAt: { type: Date, default: Date.now },    
+    URL: { type: String },
+    imageURL: { type: String },
+    publishedAt: { type: Date, default: new Data().getDate()}
   }, 
   { 
     versionKey: false

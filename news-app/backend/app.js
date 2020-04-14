@@ -30,18 +30,20 @@ app.use(bodyParser.json())
 
 app.set('view engine', 'ejs')
 
+//Login
 app.get('/', (req, res) => {
-
   //const news = newsList;
   res.render('../backend/views/login')
 })
-app.get('/addNews', (req, res) => {
 
+//Add news 
+app.get('/addNews', (req, res) => {
   //const news = newsList;
   res.render('../backend/views/postNews')
 })
-app.get('/newsList', (req,res)=>{
 
+//Get news
+app.get('/newsList', (req,res)=>{
   res.render('../backend/views/newsList', newsList)
 })
 
