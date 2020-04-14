@@ -1,22 +1,3 @@
-newsList = [
-    {
-        "title": "Election 2020",
-        "description": "Berinie dropped out, Joe Baiden is the candidate from Democratic party",
-        "publishedAt": " 04/01/2020"
-    },
-    {
-        "title": "Covid 19",
-        "description": "Covid-19 is a SARS virus that weaken human's repiratory system. And kill human",
-        "publishedAt": " 04/01/2020"
-    }
-    ,
-    {
-        "title": "Bill-201020.1",
-        "description": "The United States now have a full equipped space army. They declare a war with MARS",
-        "publishedAt": " 04/01/2020"
-    }
-
-]
 const express = require('express')
 const router = express.Router()
 
@@ -26,12 +7,23 @@ const News = require('../models/News')
 //router.use(auth)
 
 router.get('/home', (req, res) => {
-    // News.find()
-    //     .then(tasks => res.json(tasks))
-    //     .catch(err => res.status(400).json(err))
-    res.render('../backend/views/newsList', newsList)
+    News.find()
+        .then(result => {
+            console.log(result)
+            data = {
+                newsList: result
+            }
+            res.render('../backend/views/newsList', data)
+        })
+           // res.json(tasks))
+        .catch(err => res.status(400).json(err))
+    
 })
 
+
+router.get('/form', (req, res) => {
+    res.render('../backend/views/postNews')
+})
 router.get('/:id', (req, res) => {
     const { id } = req.params
 

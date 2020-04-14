@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const Admin = require('../models/Admin')
+const News = require('../models/News')
 
 router.post('/login', (req, res) => {
     const { LoginUserName, password } = req.body
@@ -52,5 +53,27 @@ router.post('/register', (req, res) => {
             res.status(400).json(err)
         })
 })
+router.post('/newsPost', (req, res) => {
 
+    const { title, description, url, imageUrl, category, date } = req.body
+
+    const singleNews = new News()
+
+    singleNews.title = title,
+    singleNews.description = description,
+    singleNews.URL = url;
+    singleNews.imageURL = imageUrl,
+    singleNews.category = category;
+    singleNews.publishedAt = date
+    console.log(singleNews)
+    
+    singleNews.save()
+        .then(newPost => {
+            console.log(newPost);
+            res.redirect('/news/home')
+        })
+        .catch(err => {
+            res.status(400).json(err)
+        })
+})
 module.exports = router

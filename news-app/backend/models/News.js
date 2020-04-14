@@ -6,7 +6,8 @@ const TaskSchema = new mongoose.Schema({
   description: { type: String, required: true },
   URL: { type: String },
   imageURL: { type: String },
-  publishedAt: { type: Date, default: new Date().getDate() }
+  categoy: { type: String },
+  publishedAt: { type: String, required: true}
 })
 
 //4. create a model
