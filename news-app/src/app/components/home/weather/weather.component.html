@@ -1,4 +1,4 @@
-<div class="row">
+<!-- <div class="row">
     <div class="col-sm-3">
         <div class="card text-center">
             <h5 class="card-header">Weather</h5>
@@ -28,4 +28,23 @@
                 <p>{{city}}</p>
             </div>
         </div>
+</div> -->
+<div class="row" >
+    <div class="card lll" style="width: 70%;">
+        <div class="card-header">
+            <h5>Weather in {{city}}: <strong>{{weather}}</strong></h5>
+        </div>
+        <div class="card-body">
+            <div id="wethr">
+                <div class="card" style="width: 90px;"><img  src={{iconurl}}></div>
+                <p> <span><strong>Temparature :</strong> {{"   "+temp}} &deg;F</span>
+                <span>,<strong> Feels Like:</strong> {{"   "+temp}} &deg;F</span>
+                <br>
+                <span><strong>Max Temp: </strong> {{"   "+temp}} &deg;F , <strong>Min Temp: </strong>{{"   "+temp}} &deg;F</span>
+                </p>
+
+            </div>
+            
+        </div>
     </div>
+</div>

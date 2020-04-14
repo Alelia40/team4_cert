@@ -1,0 +1,19 @@
+h5{
+    text-align: center;
+}
+
+.card {
+    width: 60%;
+    margin: auto;
+}
+#wethr {
+    text-align: center;
+}
+.card-header{
+    color: white;
+    background: #2e85a3 ;
+}
+.card-body {
+    background-color: #54d4ff;
+    color: white;
+}

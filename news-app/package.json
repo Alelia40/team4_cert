@@ -21,7 +21,10 @@
     "@angular/router": "~9.1.1",
     "@ng-bootstrap/ng-bootstrap": "^6.0.2",
     "angular-responsive-carousel": "^1.0.3",
+<<<<<<< Updated upstream
     "bcryptjs": "^2.4.3",
+=======
+>>>>>>> Stashed changes
     "body-parser": "^1.19.0",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
