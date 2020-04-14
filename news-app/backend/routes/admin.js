@@ -4,7 +4,7 @@ const router = express.Router()
 const Admin = require('../models/Admin')
 
 router.post('/login', (req, res) => {
-    const { username, password } = req.body
+    const { LoginUserName, password } = req.body
 
     // Admin.findOne({ username: username })
     Admin.findOne({ username })
@@ -24,14 +24,14 @@ router.post('/login', (req, res) => {
 })
 
 router.post('/register', (req, res) => {
-    const { name, email, username, password } = req.body
+    const { name, signUpEmail, SignupUserName, signUpPassword } = req.body
 
     const user = new Admin()
 
     user.name = name
-    user.email = email
-    user.username = username
-    user.generatePasswordHash(password)
+    user.email = signUpEmail
+    user.username = SignupUserName
+    user.generatePasswordHash(signUpPassword)
 
     user.save()
         .then(newAdmin => {

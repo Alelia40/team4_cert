@@ -34,6 +34,7 @@ app.get('/', (req, res) => {
   //const news = newsList;
   res.render('../backend/views/login')
 })
-
+app.use('/admin', adminRoutes)
+app.use('/news', newsRoutes)
 
 module.exports = app
