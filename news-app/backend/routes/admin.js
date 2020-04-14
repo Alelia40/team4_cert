@@ -1,68 +1,45 @@
-let mongoose = require('mongoose');
-let Admin = require('../models/Admin');
+const express = require('express')
+const router = express.Router()
 
-/*
- * GET /admin route to retrieve all the admins.
- */
-function getAdmins(req, res) {
-    //Query the DB and if no errors, send all the admins
-    let query = Admin.find({});
-    query.exec((err, admins) => {
-        if(err) res.send(err);
-        //If no errors, send them back to the client
-        res.json(admins);
-    });
-}
+const Admin = require('../models/Admin')
 
-/*
- * POST /admin to save a new admin.
- */
-function postAdmin(req, res) {
-    //Creates a new admin
-    var newAdmin = new Admin(req.body);
-    //Save it into the DB.
-    newAdmin.save((err,admin) => {
-        if(err) {
-            res.send(err);
-        }
-        else { //If no errors, send it back to the client
-            res.json({message: "Admin successfully added!", admin });
-        }
-    });
-}
+router.post('/login', (req, res) => {
+    const { username, password } = req.body
 
-/*
- * GET /admin/:id route to retrieve a admin given its id.
- */
-function getAdmin(req, res) {
-    Admin.findById(req.params.id, (err, admin) => {
-        if(err) res.send(err);
-        //If no errors, send it back to the client
-        res.json(admin);
-    });        
-}
+    // Admin.findOne({ username: username })
+    Admin.findOne({ username })
+        .then(user => {
+            if (user) { //if(user !== null) {
+                //Compare the password.
+                if (user.comparePassword(password)) {
+                    res.json(user.generateAdminObject())
+                } else {
+                    res.status(401).json({ msg: 'Invalid Credentials.' })
+                }
+            } else {
+                res.status(401).json({ msg: 'Invalid Credentials.' })
+            }
+        })
+        .catch(err => res.status(400).json(err))
+})
 
-/*
- * DELETE /admin/:id to delete a admin given its id.
- */
-function deleteAdmin(req, res) {
-    Admin.remove({_id : req.params.id}, (err, result) => {
-        res.json({ message: "Admin successfully deleted!", result });
-    });
-}
+router.post('/register', (req, res) => {
+    const { name, email, username, password } = req.body
 
-/*
- * PUT /admin/:id to updatea a admin given its id
- */
-function updateAdmin(req, res) {
-    Admin.findById({_id: req.params.id}, (err, admin) => {
-        if(err) res.send(err);
-        Object.assign(admin, req.body).save((err, admin) => {
-            if(err) res.send(err);
-            res.json({ message: 'Admin updated!', admin });
-        });    
-    });
-}
+    const user = new Admin()
 
-//export all the functions
-module.exports = { getAdmins, postAdmin, getAdmin, deleteAdmin, updateAdmin };
+    user.name = name
+    user.email = email
+    user.username = username
+    user.generatePasswordHash(password)
+
+    user.save()
+        .then(newAdmin => {
+            res.json(newAdmin.generateAdminObject())
+        })
+        .catch(err => {
+            res.status(400).json(err)
+        })
+})
+
+module.exports = router

@@ -1,68 +1,71 @@
-let mongoose = require('mongoose');
-let News = require('../models/News');
 
-/*
- * GET /news route to retrieve all the news.
- */
-function getNews(req, res) {
-    //Query the DB and if no errors, send all the news
-    let query = News.find({});
-    query.exec((err, news) => {
-        if(err) res.send(err);
-        //If no errors, send them back to the client
-        res.json(news);
-    });
-}
+const express = require('express')
+const router = express.Router()
 
-/*
- * POST /news to save a new news.
- */
-function postNews(req, res) {
-    //Creates a new news
-    var newNews = new News(req.body);
-    //Save it into the DB.
-    newNews.save((err,news) => {
-        if(err) {
-            res.send(err);
-        }
-        else { //If no errors, send it back to the client
-            res.json({message: "News successfully added!", news });
-        }
-    });
-}
+//const auth = require('../middlewares/authorization')
+const News = require('../models/News')
 
-/*
- * GET /news/:id route to retrieve a news given its id.
- */
-function getOneNews(req, res) {
-    News.findById(req.params.id, (err, news) => {
-        if(err) res.send(err);
-        //If no errors, send it back to the client
-        res.json(news);
-    });        
-}
+//router.use(auth)
 
-/*
- * DELETE /news/:id to delete a news given its id.
- */
-function deleteNews(req, res) {
-    News.remove({_id : req.params.id}, (err, result) => {
-        res.json({ message: "News successfully deleted!", result });
-    });
-}
+router.get('/', (req, res) => {
+    News.find()
+        .then(tasks => res.json(tasks))
+        .catch(err => res.status(400).json(err))
+})
 
-/*
- * PUT /news/:id to updatea a news given its id
- */
-function updateNews(req, res) {
-    News.findById({_id: req.params.id}, (err, news) => {
-        if(err) res.send(err);
-        Object.assign(news, req.body).save((err, news) => {
-            if(err) res.send(err);
-            res.json({ message: 'News updated!', news });
-        });    
-    });
-}
+router.get('/:id', (req, res) => {
+    const { id } = req.params
 
-//export all the functions
-module.exports = { getNews, postNews, getOneNews, deleteNews, updateNews };
+    News.findById(id)
+        .then(task => {
+            if (task) {
+                res.json(task)
+            } else {
+                res.status(404).json({
+                    msg: 'Task Not Found'
+                })
+            }
+        })
+        .catch(err => res.status(400).json(err))
+})
+
+router.post('/', (req, res) => {
+    const { title, description } = req.body
+
+    const news = new News()
+
+    task.title = title
+    task.description = description
+
+    news.save()
+        .then(task => res.json(task))
+        .catch(err => res.status(400).json(err))
+})
+
+router.delete('/:id', (req, res) => {
+    const { id } = req.params
+
+    News.findByIdAndRemove(id)
+        .then(task => res.json(task))
+        .catch(err => res.status(400).json(err))
+})
+
+router.put('/:id', (req, res) => {
+    res.send('PUT /tasks?:id Works!')
+})
+
+router.patch('/:id/status', (req, res) => {
+    const { id } = req.params
+
+    News.findById(id)
+        .then(task => { //task = new Task()
+            task.completed = !task.completed
+            return task.save()
+        })
+        .then(updatedTask => {
+            res.json(updatedTask)
+        })
+        .catch(err => res.status(400).json(err))
+})
+
+module.exports = router

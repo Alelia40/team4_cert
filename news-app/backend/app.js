@@ -1,29 +1,28 @@
-newsList = [
-  {
-    "title" : "Election 2020",
-    "description": "Berinie dropped out, Joe Baiden is the candidate from Democratic party",
-    "publishedAt": " 04/01/2020"
-  },
-  {
-    "title": "Covid 19",
-    "description": "Covid-19 is a SARS virus that weaken human's repiratory system. And kill human",
-    "publishedAt": " 04/01/2020"
-  }
-  ,
-  {
-    "title": "Bill-201020.1",
-    "description": "The United States now have a full equipped space army. They declare a war with MARS",
-    "publishedAt": " 04/01/2020"
-  }
-
-]
-
 const express = require('express')
 const bodyParser = require('body-parser')
+const mongoose = require('mongoose')
+const logger = require('morgan')
+const cors = require('cors')
+
+
+const adminRoutes = require('./routes/admin')
+const newsRoutes = require('./routes/news')
+//const uiRoutes = require('./routes/ui')
+
+mongoose.connect('mongodb://localhost:27018/news',
+    { useNewUrlParser: true, useUnifiedTopology: true },
+    () => console.log("DB Connected"))
 
 const app = express()
 
-app.use(bodyParser.urlencoded({ extended: true }))
+app.set('view engine', 'ejs')
+
+app.use(cors())
+// app.use(cors)
+app.use(logger('dev'))
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
 
 // parse application/json
 app.use(bodyParser.json())
@@ -34,17 +33,6 @@ app.set('view engine', 'ejs')
 app.get('/', (req, res) => {
   //const news = newsList;
   res.render('../backend/views/login')
-})
-
-//Add news 
-app.get('/addNews', (req, res) => {
-  //const news = newsList;
-  res.render('../backend/views/postNews')
-})
-
-//Get news
-app.get('/newsList', (req,res)=>{
-  res.render('../backend/views/newsList', newsList)
 })
 
 

@@ -1,27 +1,47 @@
-let mongoose = require('mongoose');
-let Schema = mongoose.Schema;
+const mongoose = require('mongoose')
+const bcryptjs = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 
-//Admin schema definition
-let AdminSchema = new Schema(
-  {
-    name: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-    createdAt: { type: Date, default: Date.now },    
-  }, 
-  { 
-    versionKey: false
+const AdminSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
+  username: { type: String, required: true, unique: true },
+  password: { type: String, required: true }
+}, {
+  timestamps: true
+})
+
+AdminSchema.methods.comparePassword = function (password) {
+  return bcryptjs.compareSync(password, this.password)
+}
+
+AdminSchema.methods.generateToken = function () {
+  const payload = {
+    email: this.email,
+    username: this.username,
+    // type: this.type
   }
-);
 
-// Sets the createdAt parameter equal to the current time
-AdminSchema.pre('save', next => {
-  now = new Date();
-  if(!this.createdAt) {
-    this.createdAt = now;
+  const token = jwt.sign(payload, 'abcd1234')
+
+  return token
+}
+
+AdminSchema.methods.ggenerateAdminObject = function () {
+  return {
+    username: this.username,
+    email: this.email,
+    token: this.generateToken()
   }
-  next();
-});
+}
 
-//Exports the AdminSchema for use elsewhere.
-module.exports = mongoose.model('Admin', AdminSchema);
+AdminSchema.methods.generatePasswordHash = function (password) {
+  const salt = bcryptjs.genSaltSync(10)
+  const passwordHash = bcryptjs.hashSync(password, salt)
+
+  this.password = passwordHash
+}
+
+const Admin = mongoose.model('Admin', AdminSchema)
+
+module.exports = Admin

@@ -1,28 +1,15 @@
-let mongoose = require('mongoose');
-let Schema = mongoose.Schema;
+const mongoose = require('mongoose')
 
-//News schema definition
-let NewsSchema = new Schema(
-  {
-    title: { type: String, required: true },
-    description: { type: String, required: true },
-    URL: { type: String },
-    imageURL: { type: String },
-    publishedAt: { type: Date, default: new Data().getDate()}
-  }, 
-  { 
-    versionKey: false
-  }
-);
+//3. create a schema
+const TaskSchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  description: { type: String, required: true },
+  URL: { type: String },
+  imageURL: { type: String },
+  publishedAt: { type: Date, default: new Date().getDate() }
+})
 
-// Sets the publishedAt parameter equal to the current time
-NewsSchema.pre('save', next => {
-  now = new Date();
-  if(!this.publishedAt) {
-    this.publishedAt = now;
-  }
-  next();
-});
+//4. create a model
+const News = mongoose.model('News', TaskSchema)
 
-//Exports the NewsSchema for use elsewhere.
-module.exports = mongoose.model('News', NewsSchema);
+module.exports = News
