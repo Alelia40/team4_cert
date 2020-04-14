@@ -6,13 +6,22 @@ const Admin = require('../models/Admin')
 router.post('/login', (req, res) => {
     const { LoginUserName, password } = req.body
 
-    // Admin.findOne({ username: username })
-    Admin.findOne({ username })
+    console.log(LoginUserName+" "+ password);
+
+    //Admin.findOne({ username: username })
+    Admin.findOne({ username: LoginUserName })
         .then(user => {
+            console.log(user)
             if (user) { //if(user !== null) {
                 //Compare the password.
                 if (user.comparePassword(password)) {
-                    res.json(user.generateAdminObject())
+                    
+                    console.log("I am here.. but I don't wanna die")
+                    // obj = user.generateAdminObject()
+                    // console.log(obj)
+                    res.redirect('/news/home')
+                    //res.render('newsList', jwt)
+                    //res.redirect('/news')
                 } else {
                     res.status(401).json({ msg: 'Invalid Credentials.' })
                 }
@@ -20,7 +29,9 @@ router.post('/login', (req, res) => {
                 res.status(401).json({ msg: 'Invalid Credentials.' })
             }
         })
-        .catch(err => res.status(400).json(err))
+        .catch(err => 
+            console.log("I am here, and I will die sooon!"))
+            //res.status(400).json(err))
 })
 
 router.post('/register', (req, res) => {

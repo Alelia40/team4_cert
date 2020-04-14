@@ -6,7 +6,7 @@ const cors = require('cors')
 
 
 const adminRoutes = require('./routes/admin')
-const newsRoutes = require('./routes/news')
+const newsRoutes = require('../backend/routes/news')
 //const uiRoutes = require('./routes/ui')
 
 mongoose.connect('mongodb://localhost:27018/news',
@@ -34,6 +34,11 @@ app.get('/', (req, res) => {
   //const news = newsList;
   res.render('../backend/views/login')
 })
+
+// app.get('/', (req, res) => {
+//   //const news = newsList;
+//   res.render('../backend/views/newsList')
+// })
 app.use('/admin', adminRoutes)
 app.use('/news', newsRoutes)
 

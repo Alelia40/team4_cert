@@ -12,6 +12,7 @@ const AdminSchema = new mongoose.Schema({
 })
 
 AdminSchema.methods.comparePassword = function (password) {
+  console.log("I am here and will be here forever")
   return bcryptjs.compareSync(password, this.password)
 }
 
@@ -27,13 +28,13 @@ AdminSchema.methods.generateToken = function () {
   return token
 }
 
-AdminSchema.methods.ggenerateAdminObject = function () {
-  return {
-    username: this.username,
-    email: this.email,
-    token: this.generateToken()
-  }
-}
+// AdminSchema.methods.ggenerateAdminObject = function () {
+//   return {
+//     username: this.username,
+//     email: this.email,
+//     token: this.generateToken()
+//   }
+// }
 
 AdminSchema.methods.generatePasswordHash = function (password) {
   const salt = bcryptjs.genSaltSync(10)
