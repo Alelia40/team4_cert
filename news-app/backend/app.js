@@ -10,6 +10,7 @@ const News = require('./models/News')
 const adminRoutes = require('./routes/admin')
 const newsRoutes = require('../backend/routes/news')
 //const apiRoutes = require('./routes/api')
+const mailRoutes = require('./routes/mail')
 
 mongoose.connect('mongodb://localhost:27018/news',
     { useNewUrlParser: true, useUnifiedTopology: true },
@@ -63,7 +64,9 @@ app.get('/getnews/id/:id', (req, res) => {
 app.use('/admin', adminRoutes)
 app.use('/news', newsRoutes)
 //app.use('/api', apiRoutes)
+app.use('/email', mailRoutes)
 
+//cors stuff for chat box
 app.use((req, res, next) => {
 
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
