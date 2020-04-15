@@ -5,7 +5,6 @@ const mongoose = require('mongoose')
 const logger = require('morgan')
 const cors = require('cors')
 
-
 const News = require('./models/News')
 
 const adminRoutes = require('./routes/admin')
@@ -25,13 +24,6 @@ app.use(methodOverride('_method'))
 app.use(cors())
 // app.use(cors)
 app.use(logger('dev'))
-
-/*
-let http = require('http');
-let server = http.Server(app);
-let socketIO = require('socket.io');
-let io = socketIO(server);
-*/
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -72,13 +64,30 @@ app.use('/admin', adminRoutes)
 app.use('/news', newsRoutes)
 //app.use('/api', apiRoutes)
 
-/*
-io.on('connection', (socket) => {
-  //console.log('user connected');
-  socket.on('msg', (message) =>{
-    io.emit("Chat Message", message);
-  });
+app.use((req, res, next) => {
+
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
+
+  res.header("Access-Control-Allow-Credentials",true);
+
+  res.setHeader(
+
+    "Access-Control-Allow-Headers",
+
+    "Origin, X-Requested-With, Content-Type, Accept"
+
+  );
+
+  res.setHeader(
+
+    "Access-Control-Allow-Methods",
+
+    "GET, POST, PATCH, DELETE, OPTIONS"
+
+  );
+
+  next();
+
 });
-*/
 
 module.exports = app

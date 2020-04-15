@@ -10,7 +10,8 @@ export class MessengerService {
   constructor( private socket:Socket) { }
 
   sendMsg(purpose: string, sender: string, message: string) {
-    this.socket.emit("msg", {
+    console.log("sending message from service");
+    this.socket.emit("chat", {
       type: purpose,
       author: sender,
       content: message
