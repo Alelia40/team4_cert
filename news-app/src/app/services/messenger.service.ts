@@ -1,20 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { Socket } from 'ngx-socket-io';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MessengerService {
 
-  subject = new Subject<any>();
+  constructor( private socket:Socket) { }
 
-  constructor() { }
-
-  sendMsg(purpose:string, sender:string, message:string){
-    this.subject.next({type: purpose, author: sender, content: message});
+  sendMsg(purpose: string, sender: string, message: string) {
+    this.socket.emit("msg", {
+      type: purpose,
+      author: sender,
+      content: message
+    });
   }
 
-  getMsg(){
-    return this.subject.asObservable();
+  getMessage() {
+    return this.socket
+      .fromEvent<any>("Chat Message");
   }
 }

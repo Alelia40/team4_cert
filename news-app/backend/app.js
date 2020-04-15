@@ -26,6 +26,13 @@ app.use(cors())
 // app.use(cors)
 app.use(logger('dev'))
 
+/*
+let http = require('http');
+let server = http.Server(app);
+let socketIO = require('socket.io');
+let io = socketIO(server);
+*/
+
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
 
@@ -64,5 +71,14 @@ app.get('/getnews/id/:id', (req, res) => {
 app.use('/admin', adminRoutes)
 app.use('/news', newsRoutes)
 //app.use('/api', apiRoutes)
+
+/*
+io.on('connection', (socket) => {
+  //console.log('user connected');
+  socket.on('msg', (message) =>{
+    io.emit("Chat Message", message);
+  });
+});
+*/
 
 module.exports = app
