@@ -16,7 +16,9 @@ export class WeatherComponent implements OnInit {
   temp:string = '';
   city:string = '';
   iconurl:string = '';
-
+  minTemp: string = '';
+  feels: string = '';
+  maxTemp: string = '';
   constructor(private http: HttpClient, private ls: LocationServiceService) { }
 
   ngOnInit(): void {
@@ -31,6 +33,9 @@ export class WeatherComponent implements OnInit {
         console.log(cityData);
         this.temp = cityData.main.temp;
         this.city = cityData.name;
+        this.feels = cityData.main.feels_like;
+        this.minTemp = cityData.main.temp_min;
+        this.maxTemp = cityData.main.temp_max
         this.weather = cityData.weather[0].description;
         this.iconurl = "http://openweathermap.org/img/w/" + cityData.weather[0].icon + ".png";
       })

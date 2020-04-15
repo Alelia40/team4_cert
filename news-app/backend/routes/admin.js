@@ -3,6 +3,7 @@ const router = express.Router()
 
 const Admin = require('../models/Admin')
 const News = require('../models/News')
+var login = false;
 
 router.post('/login', (req, res) => {
     const { LoginUserName, password } = req.body
@@ -20,6 +21,9 @@ router.post('/login', (req, res) => {
                     console.log("I am here.. but I don't wanna die")
                     // obj = user.generateAdminObject()
                     // console.log(obj)
+                        login = true
+                        module.exports.state = login
+                        //localStorage.setItem('loginStatus', 1)
                     res.redirect('/news/home')
                     //res.render('newsList', jwt)
                     //res.redirect('/news')
@@ -48,6 +52,8 @@ router.post('/register', (req, res) => {
     user.save()
         .then(newAdmin => {
             console.log(newAdmin)
+            login = true
+            module.exports.state = login
             res.redirect('/news/home')
         })
         .catch(err => {
@@ -78,3 +84,4 @@ router.post('/newsPost', (req, res) => {
         })
 })
 module.exports = router
+//module.exports.state = login

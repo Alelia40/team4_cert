@@ -1,12 +1,28 @@
 const express = require('express')
 const router = express.Router()
 
-//const auth = require('../middlewares/authorization')
 const News = require('../models/News')
+const user = require('../routes/admin')
 
+
+var tmp = true
+
+function auth(req, res, next) {
+    console.log(user.state )
+    console.log( tmp )
+    if( user.state == true && tmp == true) {
+
+        return next();
+
+    } else {
+
+        res.redirect('/')
+
+    }
+};
 //router.use(auth)
 
-router.get('/home', (req, res) => {
+router.get('/home', auth, (req, res) => {
     News.find()
         .then(result => {
             console.log(result)
@@ -21,11 +37,16 @@ router.get('/home', (req, res) => {
 })
 
 
-router.get('/form', (req, res) => {
+router.get('/form', auth,(req, res) => {
     res.render('../backend/views/postNews')
 })
 
-router.get('/:id', (req, res) => {
+router.get('/logout', auth,(req, res) => {
+    tmp = false
+    res.redirect('/')
+})
+
+router.get('/:id',auth, (req, res) => {
     const { id } = req.params
 
     News.findById(id)
@@ -74,7 +95,7 @@ router.use( function( req, res, next ) {
     next(); 
 });
 
-router.delete('/delete/:id', (req, res) => {
+router.delete('/delete/:id',auth, (req, res) => {
     const { id } = req.params
 
     News.findByIdAndRemove(id)
@@ -90,7 +111,7 @@ router.put('edit/:id', (req, res) => {
     res.send('PUT /tasks?:id Works!')
 })
 
-router.patch('/edit/:id', (req, res) => {
+router.patch('/edit/:id',auth, (req, res) => {
     const { id } = req.params
     const { title, description, url, imageUrl, category, date } = req.body
 
