@@ -18,8 +18,6 @@ export class HomeComponent implements OnInit {
       this.post = result
       console.log(this.post)
     })
-
-    
   }
 
 }
