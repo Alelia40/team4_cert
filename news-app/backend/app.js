@@ -5,6 +5,8 @@ const logger = require('morgan')
 const cors = require('cors')
 
 
+const News = require('./models/News')
+
 const adminRoutes = require('./routes/admin')
 const newsRoutes = require('../backend/routes/news')
 //const uiRoutes = require('./routes/ui')
@@ -34,7 +36,18 @@ app.get('/', (req, res) => {
   //const news = newsList;
   res.render('../backend/views/login')
 })
-
+app.get('/getnews', (req,res)=>{
+  //res.send("Jonaed")
+  News.find().then((result) => {
+    res.json(result)
+  }).catch(err => res.sendStatus(403).send(err))
+})
+app.get('/getnews/:category', (req, res) => {
+  const category = req.params.category
+  News.find({category}).then((result) => {
+    res.json(result)
+  }).catch(err => res.sendStatus(403).send(err))
+})
 // app.get('/', (req, res) => {
 //   //const news = newsList;
 //   res.render('../backend/views/newsList')

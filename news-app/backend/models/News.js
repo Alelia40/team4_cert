@@ -6,7 +6,7 @@ const TaskSchema = new mongoose.Schema({
   description: { type: String, required: true },
   URL: { type: String },
   imageURL: { type: String },
-  categoy: { type: String },
+  category: { type: String },
   publishedAt: { type: String, required: true}
 })
 

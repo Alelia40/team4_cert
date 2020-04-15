@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FetchNewsService } from 'src/app/services/fetch-news.service';
+import { News } from 'src/app/models/news';
 
 @Component({
   selector: 'app-sports',
@@ -7,12 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SportsComponent implements OnInit {
   
-  sportnewsList = [  ]
+  sportnewsList : News[] = []
 
-  constructor() { }
+  constructor(private newsService: FetchNewsService) { }
 
   ngOnInit(): void {
-    this.sportnewsList = [] 
+
+    this.newsService.getNewsByCategory("Sport").subscribe( (result: News[]) => {
+        this.sportnewsList = result
+    })
+      
   }
 
 }
