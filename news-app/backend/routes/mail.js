@@ -10,17 +10,27 @@ sgmail.setApiKey('SG.UPhfbXgfRGuwokIsCjgqiw.QQcLdj089ovx2DzjKl55EgL95PdzlsFnnt89
 
 router.post("/sendMail", (req, res) => {
     let data = req.body;
-    console.log(data);
+    let sender = data.email; 
+    if (data.email == ""){
+        sender = "anonymous"
+    }
     const msg = {
         to: 'tcst4test@gmail.com',
-        from: data.email,
+        from: 'tcst4test@gmail.com',
         subject: 'New Query',
-        text: data.content,
-        html: '<strong>From NewsMe Contact page</strong>',
+        html: `<p>${data.content}</p>
+        <p>-from ${sender}</p>
+        <strong>From the Update 24/7 contact-us page</strong>`,
     };
-    sgmail.send(msg);
+    sgmail.send(msg, (err) =>{
+        if(err){
+            res.status(500).send("error");
+        }else{
+            res.status(200).send("sendgrid sending email to " + data.email);
+        }
+    });
 
-    res.send("sendgrid sending email to " + data.email);
+    
 })
 
 module.exports = router;

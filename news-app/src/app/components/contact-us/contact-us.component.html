@@ -1,22 +1,25 @@
 <h2>Send us a query</h2>
 <hr />
-<form (submit)="handleEmail()">
+<div *ngIf="invalid == true" class="alert alert-danger">You need to actually have a query</div>
+<div *ngIf="sent == true" class="alert alert-info">Sent. Thanks for your feedback.</div>
+<form >
     <div class="row">
         <div class="col">
-            <label for="email">Your Email</label>
-            <input type="text" class="form-control" name="email" [(ngModel)]='email'>
+            <label for="email">Your Email (If you want to be contacted)</label>
+            <input type="text" class="form-control" placeholder="joe@exmple.com" name="email" [(ngModel)]='email'>
         </div>
     </div>
     <div class="row">
         <div class="col">
             <label for="query">Your Query</label>
-            <input type="text" class="form-control" name="query" [(ngModel)]='query'>
+            <textarea type="text" class="form-control" name="query" placeholder="Why is this site so awesome?" [(ngModel)]='query'></textarea>
         </div>
     </div>
     <hr />
     <div class="row">
         <div class="col">
-            <input type="submit" class="btn btn-info" value="Submit Query">
+            <button class="btn btn-info"(click)="handleEmail()">Submit Query</button>
         </div>
     </div>
 </form>
+<br>

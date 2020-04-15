@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { EmailService } from 'src/app/services/email.service';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -9,24 +8,34 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ContactUsComponent implements OnInit {
 
+  invalid:boolean = false;
+  sent:boolean = false;
   email: string = '';
   query: string = '';
 
-  constructor(private es: EmailService, private http:HttpClient) { }
+  constructor(private http:HttpClient) { }
 
   ngOnInit(): void {
   }
 
   handleEmail() {
-    if (this.email != '' && this.query != '') {
+    this.invalid = false;
+    this.sent = false;
+    if (this.query != '') {
       console.log('sending email with ' + this.email + ', ' + this.query);
       let data = {
         email: this.email,
         content: this.query
       }
-      console.log(data);
-      this.http.post('http://localhost:3000/email/sendMail', data);
+      this.http.post('http://localhost:3000/email/sendMail', data, {responseType:"text"}).subscribe( data =>{
+        this.sent = true;
+        this.email = '';
+        this.query = '';
+      });
+    }else{
+      this.invalid = true;
     }
   }
+
 
 }
