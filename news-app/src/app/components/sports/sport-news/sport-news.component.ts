@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { News } from 'src/app/models/news';
+import { FetchNewsService } from 'src/app/services/fetch-news.service';
 
 @Component({
   selector: 'app-sport-news',
@@ -8,23 +10,34 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class SportNewsComponent implements OnInit {
 
+  newsId: string = "";
+  title: string = "";
+  description: string = "";
+  URL: string = "";
+  imageURL: string = "";
+  publishedAt: string = "";
+
   constructor(private router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute, private newsService: FetchNewsService) { }
 
-  newsId: number;
-  title: string;
-  description: string;
-  publishedAt: string; 
-
+   
+  
   ngOnInit(): void {
 
     this.newsId = this.route.snapshot.params.id;
-    // A method to get the info from backend
-    // this.adminServ.getSingleUser(this.userId).subscribe(result => {
-    //   this.title = result.name;
-    //   this.description = result.number;
-    //   this.publishedAt = result.email;
-    // });
+
+    this.newsService.getNewsById(this.newsId).subscribe( result=>{
+      var news;
+      setTimeout(() => { news = result[0] 
+        this.title = news.title;
+        this.description = news.description;
+        this.URL = news.URL;
+        this.imageURL = news.imageURL;
+        this.publishedAt = news.publishedAt;
+      }, 0)
+      
+      
+    })
   }
 
 }

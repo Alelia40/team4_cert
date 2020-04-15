@@ -22,4 +22,8 @@ export class FetchNewsService {
     return this.http.get('http://localhost:3000/getnews/'+category)
   }
 
+  getNewsById(id){
+    return this.http.get<News>('http://localhost:3000/getnews/id/'+id)
+  }
+
 }
