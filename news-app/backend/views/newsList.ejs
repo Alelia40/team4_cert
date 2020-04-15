@@ -23,7 +23,7 @@
             <a class="navbar-brand" href="#">Updated 24/7 Admin</a>
             <nav class="my-2 my-md-0 mr-md-3 ">
                 <!-- add the link to add News -->
-                <a class="p-2 text-secondary" href="/news/form">NewsFrom</a>
+                <a class="p-2 text-secondary" href="/news/form">NewsForm</a>
                 <!-- add the href to list and edit, delete existing news -->
                 <a class="p-2 text-white" href="/news/home">News List</a>
                 <!-- add the href to Log out -->
@@ -56,8 +56,8 @@
                     <td><%=item.description%></td>
                     <td><%=item.publishedAt%></td>
                     <td> 
-                        <button type="submit" class="btn btn-warning btn-sm" style="margin-right: 5px;">Edit</button>
-                        <a class="btn btn-danger btn-sm" href="/news/"+item._id >Delete</a>
+                        <a class="btn btn-danger btn-sm" href="/news/<%=item._id%>">Edit</a>
+                        <a class="btn btn-danger btn-sm" href="/news/delete/<%=item._id%>?_method=DELETE">Delete</a>
                     </td>
                 </tr>
                 <% }) %>
