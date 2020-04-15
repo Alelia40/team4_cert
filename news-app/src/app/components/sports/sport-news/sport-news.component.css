@@ -7,4 +7,11 @@
 }
 img {
     height: 500px;
+    margin-bottom: 10px;
+}
+.card-title {
+    margin-top: 20px;
+}
+.card-body{
+    padding-top: 0px;
 }

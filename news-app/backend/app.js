@@ -10,7 +10,7 @@ const News = require('./models/News')
 
 const adminRoutes = require('./routes/admin')
 const newsRoutes = require('../backend/routes/news')
-//const uiRoutes = require('./routes/ui')
+//const apiRoutes = require('./routes/api')
 
 mongoose.connect('mongodb://localhost:27018/news',
     { useNewUrlParser: true, useUnifiedTopology: true },
@@ -63,5 +63,6 @@ app.get('/getnews/id/:id', (req, res) => {
 
 app.use('/admin', adminRoutes)
 app.use('/news', newsRoutes)
+//app.use('/api', apiRoutes)
 
 module.exports = app

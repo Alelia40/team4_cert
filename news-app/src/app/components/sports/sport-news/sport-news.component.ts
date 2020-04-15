@@ -32,9 +32,15 @@ export class SportNewsComponent implements OnInit {
         this.title = news.title;
         this.description = news.description;
         this.URL = news.URL;
-        this.imageURL = news.imageURL;
+        if(news.imageURL.length < 10) {
+          this.imageURL = "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
+        }
+        else {
+          this.imageURL = news.imageURL;
+        }
+        
         this.publishedAt = news.publishedAt;
-      }, 0)
+      }, 100)
       
       
     })
