@@ -25,12 +25,9 @@ export class WeatherComponent implements OnInit {
     this.ls.getPosition().then( pos =>{
       this.lat = pos.lat;
       this.long = pos.lng;
-      //console.log(this.lat);
-      //console.log(this.long);
 
       this.getWeather(this.lat, this.long).subscribe( data =>{
         var cityData = data['list']['0'];
-        console.log(cityData);
         this.temp = cityData.main.temp;
         this.city = cityData.name;
         this.feels = cityData.main.feels_like;

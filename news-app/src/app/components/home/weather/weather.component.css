@@ -6,7 +6,11 @@ h5{
     width: 100%;
     margin: auto;
 }
+p {
+    margin-top: 20px;
+}
 #wethr {
+    margin-top: 30px;
     text-align: center;
 }
 .card-header{
@@ -16,4 +20,14 @@ h5{
 .card-body {
     background-color: #54d4ff;
     color: black;
+}
+.lll {
+    height: 280px;
+}
+strong {
+    margin-right: 1px;
+    margin-left: 20px;
+}
+#l{
+    margin-top: 20px;
 }
