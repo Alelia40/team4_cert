@@ -48,6 +48,21 @@ router.get('/:id', (req, res) => {
         .catch(err => res.status(400).json(err))
 })
 
+router.get('/allNews', (req, res) => {
+
+    News.find()
+        .then(results => {
+            if (results) {
+                res.json(results)
+            } else {
+                res.status(404).json({
+                    msg: 'Task Not Found'
+                })
+            }
+        })
+        .catch(err => res.status(400).json(err))
+})
+
 router.post('/', (req, res) => {
     const { title, description } = req.body
 

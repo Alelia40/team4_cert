@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-news',
@@ -10,10 +11,14 @@ export class NewsComponent implements OnInit {
   currentTitle:string = "Title";
   currentContent:string= "Article Content";
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
     this.handleSelect(1);
+
+    this.getNews().subscribe( data => {
+      console.log(data);
+    })
   }
 
   handleSelect(num:Number){
@@ -24,6 +29,10 @@ export class NewsComponent implements OnInit {
     }else{
       console.log("3rd most recent story");
     }
+  }
+
+  getNews(){
+    return this.http.get(`http://localhost:3000/news/allNews`);
   }
 
 }
