@@ -19,14 +19,9 @@ router.post('/login', (req, res) => {
                 if (user.comparePassword(password)) {
                     
                     console.log("I am here.. but I don't wanna die")
-                    // obj = user.generateAdminObject()
-                    // console.log(obj)
-                        login = true
-                        module.exports.state = login
-                        //localStorage.setItem('loginStatus', 1)
+                    login = true
+                    module.exports.state = login
                     res.redirect('/news/home')
-                    //res.render('newsList', jwt)
-                    //res.redirect('/news')
                 } else {
                     res.status(401).json({ msg: 'Invalid Credentials.' })
                 }
@@ -36,7 +31,6 @@ router.post('/login', (req, res) => {
         })
         .catch(err => 
             console.log("I am here, and I will die sooon!"))
-            //res.status(400).json(err))
 })
 
 router.post('/register', (req, res) => {
@@ -84,4 +78,3 @@ router.post('/newsPost', (req, res) => {
         })
 })
 module.exports = router
-//module.exports.state = login

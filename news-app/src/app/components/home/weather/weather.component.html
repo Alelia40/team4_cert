@@ -1,34 +1,3 @@
-<!-- <div class="row">
-    <div class="col-sm-3">
-        <div class="card text-center">
-            <h5 class="card-header">Weather</h5>
-            <div class="card-body">
-                <p>{{weather}}</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-3">
-        <div class="card text-center">
-            <h5 class="card-header">Icon</h5>
-            <div id="icon" class="card-body"><img src={{iconurl}}></div>
-        </div>
-    </div>
-    <div class="col-sm-3">
-        <div class="card text-center">
-            <h5 class="card-header">Temp</h5>
-            <div class="card-body">
-                <p>{{temp}} &deg;F</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-3">
-        <div class="card text-center">
-            <h5 class="card-header">City</h5>
-            <div class="card-body">
-                <p>{{city}}</p>
-            </div>
-        </div>
-</div> -->
 <div class="row" >
     <div class="card lll" style="width: 97%;">
         <div class="card-header">
@@ -38,9 +7,9 @@
             <div id="wethr">
                 <div class="card" style="width: 90px;"><img  src={{iconurl}}></div>
                 <p> <span><strong>Temparature :</strong> {{"   "+temp}} &deg;F</span>
-                <span>,<strong> Feels Like:</strong> {{"   "+feels}} &deg;F</span>
+                <span>,&emsp; <strong> Feels Like:</strong> {{"   "+feels}} &deg;F</span>
                 <br>
-                <span><strong>Max Temp: </strong> {{"   "+maxTemp}} &deg;F , <strong>Min Temp: </strong>{{"   "+minTemp}} &deg;F</span>
+                <span id="l"><strong>Max Temp: </strong> {{"   "+maxTemp}} &deg;F,  <strong> Min Temp: </strong>{{"   "+minTemp}} &deg;F</span>
                 </p>
 
             </div>
