@@ -10,14 +10,16 @@ import { News } from 'src/app/models/news'
 })
 export class HomeComponent implements OnInit {
 
-  post : News [] = []
+  //post : News [] = []
   constructor( private newsServ: FetchNewsService) { }
 
   ngOnInit(): void {
+    /*
     this.newsServ.getNews().subscribe( (result: News[]) => {
       this.post = result
       console.log(this.post)
     })
+    */
   }
 
 }

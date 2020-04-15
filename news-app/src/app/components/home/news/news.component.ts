@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { News } from 'src/app/models/news';
+import { FetchNewsService } from 'src/app/services/fetch-news.service';
 
 @Component({
   selector: 'app-news',
@@ -11,17 +12,20 @@ export class NewsComponent implements OnInit {
   currentTitle:string = "Title";
   currentContent:string= "Article Content";
 
-  @Input() news:News[];
+  news:News[] = [];
 
   article1:Object;
   article2:Object;
   article3:Object;
 
-  constructor() { }
+  constructor( private newsServ: FetchNewsService) { }
 
   ngOnInit(): void {
-    this.handleSelect(1);
-    console.log(this.news);
+    this.newsServ.getNews().subscribe( (result: News[]) => {
+      this.news = result
+      console.log(this.news)
+      this.handleSelect(1);
+    })
   }
 
   handleSelect(num:Number){
