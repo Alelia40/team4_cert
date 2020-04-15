@@ -14,7 +14,7 @@ export class ChatComponent implements OnInit {
   messageContent:string = '';
   username:string = '';
 
-  constructor(private renderer:Renderer2, private ms:MessengerService) {
+  constructor(private renderer:Renderer2) {
   }
 
   ngOnInit(): void {

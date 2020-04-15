@@ -14,7 +14,7 @@ mongoose.connect('mongodb://localhost:27018/news',
 
 const app = express()
 
-//app.use(cors())
+app.use(cors())
 //app.options('https://localhost:4200', cors())
 app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -27,11 +27,13 @@ app.use(function (req, res, next) {
 app.use(logger('dev'))
 
 
+/*
 let http = require('http');
 let server = http.Server(app);
 
 let socketIO = require('socket.io');
 let io = socketIO(server);
+*/
 
 app.set('view engine', 'ejs')
 
@@ -56,6 +58,7 @@ app.get('/', (req, res) => {
 app.use('/admin', adminRoutes)
 app.use('/news', newsRoutes)
 
+/*
 io.on('connection', (socket) => {
   //console.log('user connected');
 
@@ -63,5 +66,6 @@ io.on('connection', (socket) => {
     io.emit("Chat Message", message);
   });
 });
+*/
 
 module.exports = app
