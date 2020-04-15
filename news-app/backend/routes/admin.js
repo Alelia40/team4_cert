@@ -47,7 +47,8 @@ router.post('/register', (req, res) => {
 
     user.save()
         .then(newAdmin => {
-            res.json(newAdmin.generateAdminObject())
+            console.log(newAdmin)
+            res.redirect('/news/home')
         })
         .catch(err => {
             res.status(400).json(err)

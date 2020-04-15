@@ -1,4 +1,5 @@
 const express = require('express')
+const methodOverride = require('method-override')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const logger = require('morgan')
@@ -18,6 +19,8 @@ mongoose.connect('mongodb://localhost:27018/news',
 const app = express()
 
 app.set('view engine', 'ejs')
+
+app.use(methodOverride('_method'))
 
 app.use(cors())
 // app.use(cors)

@@ -24,23 +24,29 @@ router.get('/home', (req, res) => {
 router.get('/form', (req, res) => {
     res.render('../backend/views/postNews')
 })
+
 router.get('/:id', (req, res) => {
     const { id } = req.params
 
     News.findById(id)
-        .then(task => {
-            if (task) {
-                res.json(task)
+        .then(news => {
+            if (news) {
+                console.log(news)
+                data = {
+                    newsItem: news
+                }
+                res.render('../backend/views/editNews', data)
             } else {
                 res.status(404).json({
-                    msg: 'Task Not Found'
+                    msg: 'News Not Found'
                 })
             }
         })
         .catch(err => res.status(400).json(err))
 })
 
-router.post('/', (req, res) => {
+// post handled in admin route
+/* router.post('/', (req, res) => {
     const { title, description } = req.body
 
     const news = new News()
@@ -51,30 +57,57 @@ router.post('/', (req, res) => {
     news.save()
         .then(task => res.json(task))
         .catch(err => res.status(400).json(err))
-})
+}) */
 
-router.delete('/:id', (req, res) => {
+router.use( function( req, res, next ) {
+    // this middleware will call for each requested
+    // and we checked for the requested query properties
+    // if _method was existed
+    // then we know, clients need to call DELETE request instead
+    if ( req.query._method == 'DELETE' ) {
+        // change the original METHOD
+        // into DELETE method
+        req.method = 'DELETE';
+        // and set requested url to /user/12
+        req.url = req.path;
+    }       
+    next(); 
+});
+
+router.delete('/delete/:id', (req, res) => {
     const { id } = req.params
 
     News.findByIdAndRemove(id)
-        .then(task => res.json(task))
+        .then(news => {
+            console.log(news)
+            res.redirect('/news/home')
+        })
         .catch(err => res.status(400).json(err))
 })
 
-router.put('/:id', (req, res) => {
+// put not used
+router.put('edit/:id', (req, res) => {
     res.send('PUT /tasks?:id Works!')
 })
 
-router.patch('/:id/status', (req, res) => {
+router.patch('/edit/:id', (req, res) => {
     const { id } = req.params
+    const { title, description, url, imageUrl, category, date } = req.body
 
     News.findById(id)
-        .then(task => { //task = new Task()
-            task.completed = !task.completed
-            return task.save()
+        .then(news => {
+            news.title = title
+            news.description = description
+            news.URL = url
+            news.imageURL = imageUrl
+            news.category = category
+            news.date = date
+
+            return news.save()
         })
-        .then(updatedTask => {
-            res.json(updatedTask)
+        .then(updatedNews => {
+            console.log(updatedNews)
+            res.redirect('/news/home')
         })
         .catch(err => res.status(400).json(err))
 })
