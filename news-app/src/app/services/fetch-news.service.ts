@@ -18,6 +18,7 @@ export class FetchNewsService {
   getNews() {
     return this.http.get('http://localhost:3000/getnews')
   }
+  
   getNewsByCategory(category) {
     return this.http.get('http://localhost:3000/getnews/'+category)
   }
