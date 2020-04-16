@@ -5,12 +5,11 @@ const News = require('../models/News')
 const user = require('../routes/admin')
 
 
-var tmp = true
 
 function auth(req, res, next) {
     console.log('user state: ' + user.state )
-    console.log('tmp: ' + tmp )
-    if( user.state == true && tmp == true) {
+    
+    if( user.state == true ) {
 
         return next();
 
@@ -20,7 +19,6 @@ function auth(req, res, next) {
 
     }
 };
-//router.use(auth)
 
 router.get('/home', auth, (req, res) => {
     News.find()
@@ -42,7 +40,7 @@ router.get('/form', auth,(req, res) => {
 })
 
 router.get('/logout', auth,(req, res) => {
-    tmp = false
+    user.state = false
     res.redirect('/')
 })
 
@@ -66,19 +64,6 @@ router.get('/:id',auth, (req, res) => {
         .catch(err => res.status(400).json(err))
 })
 
-// post handled in admin route
-/* router.post('/', (req, res) => {
-    const { title, description } = req.body
-
-    const news = new News()
-
-    task.title = title
-    task.description = description
-
-    news.save()
-        .then(task => res.json(task))
-        .catch(err => res.status(400).json(err))
-}) */
 
 router.use( function( req, res, next ) {
     // this middleware will call for each requested
@@ -106,10 +91,6 @@ router.delete('/delete/:id',auth, (req, res) => {
         .catch(err => res.status(400).json(err))
 })
 
-// put not used
-router.put('edit/:id', (req, res) => {
-    res.send('PUT /tasks?:id Works!')
-})
 
 router.patch('/edit/:id',auth, (req, res) => {
     const { id } = req.params

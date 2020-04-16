@@ -30,9 +30,9 @@ router.post('/login', (req, res) => {
                 //res.status(401).json({ msg: 'Invalid Credentials.' })
             }
         })
-        .catch(err => 
-            console.log('Admin.findOne error')
-})
+        .catch(err => { console.log('Admin.findOne error') }
+            )
+    })
 
 router.post('/register', (req, res) => {
     const { name, signUpEmail, SignupUserName, signUpPassword } = req.body
