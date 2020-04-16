@@ -8,8 +8,8 @@ const user = require('../routes/admin')
 var tmp = true
 
 function auth(req, res, next) {
-    console.log(user.state )
-    console.log( tmp )
+    console.log('user state: ' + user.state )
+    console.log('tmp: ' + tmp )
     if( user.state == true && tmp == true) {
 
         return next();

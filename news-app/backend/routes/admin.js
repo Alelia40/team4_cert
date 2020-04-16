@@ -18,19 +18,20 @@ router.post('/login', (req, res) => {
                 //Compare the password.
                 if (user.comparePassword(password)) {
                     
-                    console.log("I am here.. but I don't wanna die")
                     login = true
                     module.exports.state = login
                     res.redirect('/news/home')
                 } else {
-                    res.status(401).json({ msg: 'Invalid Credentials.' })
+                    res.redirect('/?error=' + encodeURIComponent('Invalid_Credentials'))
+                    //res.status(401).json({ msg: 'Invalid Credentials.' })
                 }
             } else {
-                res.status(401).json({ msg: 'Invalid Credentials.' })
+                res.redirect('/?error=' + encodeURIComponent('Invalid_Credentials'))
+                //res.status(401).json({ msg: 'Invalid Credentials.' })
             }
         })
         .catch(err => 
-            console.log("I am here, and I will die sooon!"))
+            console.log('Admin.findOne error')
 })
 
 router.post('/register', (req, res) => {
@@ -51,7 +52,8 @@ router.post('/register', (req, res) => {
             res.redirect('/news/home')
         })
         .catch(err => {
-            res.status(400).json(err)
+            res.redirect('/?error=' + encodeURIComponent('Duplicate_Username'))
+            //res.status(400).json(err)
         })
 })
 router.post('/newsPost', (req, res) => {

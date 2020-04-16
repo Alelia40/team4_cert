@@ -51,12 +51,12 @@
                 <form method="POST" action="/admin/newsPost">
                     <div class="form-group">
                         <label for="title">Title</label>
-                        <input class="form-control" type="text" placeholder="Enter Title" id="title" name="title">
+                        <input class="form-control" type="text" placeholder="Enter Title" id="title" name="title" required>
                     </div>
 
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <input class="form-control" type="text" placeholder="Enter description" id="description" name="description">
+                        <input class="form-control" type="text" placeholder="Enter description" id="description" name="description" required>
                     </div>
                     <div class="form-group">
                         <label for="url">URL</label>
@@ -72,7 +72,7 @@
                     </div>
                     <div class="form-group">
                         <label for="date">Published At</label>
-                        <input class="form-control" type="date" id="date" name="date">
+                        <input class="form-control" type="date" id="date" name="date" required>
                     </div>
                     <div class="form-group" style=" display: flex; justify-content: center;">
                         <button type="submit" class="btn btn-primary btn-lg" style="margin-right: 5px;" >Add</button>
