@@ -25,16 +25,12 @@ export class NewsComponent implements OnInit {
     this.newsServ.getNews().subscribe( (result: News[]) => {
       this.news = result;
       console.log(this.news);
-      this.handleSelect(1);
+      this.showStory(1);
     })
   }
 
-  handleSelect(num:Number){
-    this.showStory(num);
-  }
-
   //selects from the last 3 elements in the stack
-  private showStory(offset){
+  showStory(offset){
     let newsItem = this.news[this.news.length - offset];
     if(newsItem != undefined){
       this.currentTitle = newsItem.title;
