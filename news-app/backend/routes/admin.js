@@ -32,7 +32,7 @@ router.post('/login', (req, res) => {
         })
         .catch(err => { console.log('Admin.findOne error') }
             )
-    })
+})
 
 router.post('/register', (req, res) => {
     const { name, signUpEmail, SignupUserName, signUpPassword } = req.body
