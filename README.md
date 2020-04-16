@@ -5,3 +5,4 @@ Project Memebers:
 
 Abhjit Chakraborty
 Abdullah Jonaed
+Sean Dehghani
