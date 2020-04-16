@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { News } from 'src/app/models/news';
 import { FetchNewsService } from 'src/app/services/fetch-news.service';
+import { throwError } from 'rxjs';
 
 @Component({
   selector: 'app-news',
@@ -22,27 +23,15 @@ export class NewsComponent implements OnInit {
 
   ngOnInit(): void {
     this.newsServ.getNews().subscribe( (result: News[]) => {
-      this.news = result
-      console.log(this.news)
-      this.handleSelect(1);
+      this.news = result;
+      console.log(this.news);
+      this.showStory(1);
     })
   }
 
-  handleSelect(num:Number){
-    if(num ==1){
-      console.log("most recent story");
-      this.showStory(0);
-    }else if(num == 2){
-      console.log("2nd most recent story");
-      this.showStory(1);
-    }else{
-      console.log("3rd most recent story");
-      this.showStory(2);
-    }
-  }
-
-  private showStory(num){
-    let newsItem = this.news[num];
+  //selects from the last 3 elements in the stack
+  showStory(offset){
+    let newsItem = this.news[this.news.length - offset];
     if(newsItem != undefined){
       this.currentTitle = newsItem.title;
       this.currentContent = newsItem.description;
